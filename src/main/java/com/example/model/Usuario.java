@@ -1,7 +1,8 @@
 package com.example.model;
 
-import jakarta.persistence.*;
 
+
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -18,6 +19,8 @@ public class Usuario {
     private String telefono;
     private String tipo;
     private String password;
+
+
     @OneToMany(mappedBy = "usuario")
     private List<Producto> productos;
     @OneToMany(mappedBy = "usuario")
