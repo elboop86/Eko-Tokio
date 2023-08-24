@@ -40,27 +40,14 @@ public class ProductoController {
         return "productos/create";
     }
 
-// Método guardar producto
+    // Método guardar producto
     @PostMapping ("/save")
-    public String save(Producto producto,@RequestParam("img") MultipartFile file) throws IOException {
+    public String save(Producto producto) throws IOException {
         LOGGER.info("Mensaje correcto");
         Usuario u = new Usuario(1,"","","","","","","");
         producto.setUsuario(u);
 
-        //imagen
-        if(producto.getId()==null) { // cuando se crea un producto
-            String  nombreImagen = upload.saveImage(file);
-            producto.setImagen(nombreImagen);
-        } else {
-            if(file.isEmpty()) { // cuando editamos el producto pero no cambiamos la imagen
-                Producto p = new Producto();
-                p= productoService.get(producto.getId()).get();
-                producto.setImagen(p.getImagen());
-            } else { // el caso de que si cambio la imagen cuando edito el producto
-                String  nombreImagen = upload.saveImage(file);
-                producto.setImagen(nombreImagen);
-            }
-        }
+
         productoService.save(producto);
         return "redirect:/productos";
     }
@@ -76,15 +63,30 @@ public class ProductoController {
         return "productos/edit";
     }
     // Método subir producto
-@PostMapping("/update")
-    public String update(Producto producto) {
+    @PostMapping("/update")
+    public String update(Producto producto,@RequestParam("img") MultipartFile file) throws IOException {
+        //imagen
+        if(producto.getId()==null) { // cuando se crea un producto
+            String  nombreImagen = upload.saveImage(file);
+            producto.setImagen(nombreImagen);
+        } else {
+            if(file.isEmpty()) { // cuando editamos el producto pero no cambiamos la imagen
+                Producto p = new Producto();
+                p= productoService.get(producto.getId()).get();
+                producto.setImagen(p.getImagen());
+            } else { // el caso de que si cambio la imagen cuando edito el producto
+                String  nombreImagen = upload.saveImage(file);
+                producto.setImagen(nombreImagen);
+            }
+        }
+
         productoService.update(producto);
         return "redirect:/productos";
     }
 
     // Método subir producto
     @GetMapping("/delete/{id")
-    public String delete(@PathVariable Integer id) {
+    public String delete(@PathVariable Integer id ) {
         productoService.delete(id);
         return "redirect:/productos";
     }
