@@ -37,6 +37,7 @@ public class ProductoController {
     public String create() {
         return "productos/create";
     }
+
 // Método guardar producto
     @PostMapping ("/save")
     public String save(Producto producto) {
@@ -61,6 +62,13 @@ public class ProductoController {
 @PostMapping("/update")
     public String update(Producto producto) {
         productoService.update(producto);
+        return "redirect:/productos";
+    }
+
+    // Método subir producto
+    @GetMapping("/delete/{id")
+    public String delete(@PathVariable Integer id) {
+        productoService.delete(id);
         return "redirect:/productos";
     }
 }
