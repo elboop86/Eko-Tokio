@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service                    // Métodos CRUD
@@ -32,5 +33,10 @@ public class ProductoServiceImpl implements ProductoService{
     @Override // Implementar método delete
     public void delete(Integer id) {
         productoRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Producto> findAll() {
+        return productoRepository.findAll();
     }
 }
