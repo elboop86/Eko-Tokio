@@ -42,6 +42,9 @@ public class Usuario {
         this.password = password;
     }
 
+    public Usuario(int i, String s, String s1, String s2) {
+    }
+
     public Integer getId() {
         return id;
     }
