@@ -65,21 +65,23 @@ public class ProductoController {
     // Método subir producto
     @PostMapping("/update")
     public String update(Producto producto,@RequestParam("img") MultipartFile file) throws IOException {
+        Producto p = new Producto();
+        p = productoService.get(producto.getId()).get();
         //imagen
-        if(producto.getId()==null) { // cuando se crea un producto
-            String  nombreImagen = upload.saveImage(file);
-            producto.setImagen(nombreImagen);
-        } else {
-            if(file.isEmpty()) { // cuando editamos el producto pero no cambiamos la imagen
-                Producto p = new Producto();
-                p= productoService.get(producto.getId()).get();
+
+            if (file.isEmpty()) { // cuando editamos el producto pero no cambiamos la imagen
+
                 producto.setImagen(p.getImagen());
             } else { // el caso de que si cambio la imagen cuando edito el producto
-                String  nombreImagen = upload.saveImage(file);
+                // elimina la imagen mientras no sea la imagen default que esta por defecto
+                if(p.getImagen().equals("default.jpg")) {
+                    upload.deleteImage(p.getImagen());
+                }
+                String nombreImagen = upload.saveImage(file);
                 producto.setImagen(nombreImagen);
             }
-        }
 
+        producto.setUsuario(p.getUsuario());
         productoService.update(producto);
         return "redirect:/productos";
     }
@@ -87,6 +89,14 @@ public class ProductoController {
     // Método subir producto
     @GetMapping("/delete/{id")
     public String delete(@PathVariable Integer id ) {
+        Producto p= new Producto();
+        p= productoService.get(id).get();
+
+        // elimina la imagen mientras no sea la imagen default que esta por defecto
+        if(p.getImagen().equals("default.jpg")) {
+            upload.deleteImage(p.getImagen());
+        }
+
         productoService.delete(id);
         return "redirect:/productos";
     }
