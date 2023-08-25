@@ -1,7 +1,5 @@
 package com.example.model;
 
-
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -41,8 +39,11 @@ public class Usuario {
         this.tipo = tipo;
         this.password = password;
     }
-
-    public Usuario(int i, String s, String s1, String s2) {
+    // cambio
+    @ManyToOne
+    @JoinColumn(name = "id") // Cambia "usuario_id" por el nombre de la columna en la tabla "ordenes"
+    private Usuario usuario;
+    public Usuario( String s1, String s2, String s3,String s4, String s5, String s6,String s7) {
     }
 
     public Integer getId() {
