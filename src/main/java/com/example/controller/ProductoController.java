@@ -4,6 +4,7 @@ import com.example.model.Producto;
 import com.example.model.Usuario;
 import com.example.service.ProductoService;
 import com.example.service.UploadFileService;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,13 +14,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("/productos")
 public class ProductoController {
 
-    private final Logger LOGGER = (Logger) LoggerFactory.getLogger(ProductoController.class);
+    private final Logger log= LoggerFactory.getLogger(ProductoController.class);
     // Método para guardar un producto nuevo, Logger es para registrar mensajes de un componente a un sistema o aplicación.
 
     @Autowired
@@ -43,7 +43,7 @@ public class ProductoController {
     // Método guardar producto
     @PostMapping ("/save")
     public String save(Producto producto) throws IOException {
-        LOGGER.info("Mensaje correcto");
+        log.info("Mensaje correcto");
         Usuario u = new Usuario(1,"","","","","","","");
         producto.setUsuario(u);
 
@@ -58,7 +58,7 @@ public class ProductoController {
         Optional<Producto> optionalProducto=productoService.get(id);
         producto= optionalProducto.get();
 
-        LOGGER.info("Producto buscado: {}");
+        log.info("Producto buscado: {}");
         model.addAttribute("producto", producto); //Envia a la vista el objeto buscado
         return "productos/edit";
     }
