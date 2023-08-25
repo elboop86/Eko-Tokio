@@ -13,8 +13,12 @@ import java.util.Optional;
 @Service                    // Métodos CRUD
 public class ProductoServiceImpl implements ProductoService{
 
-    @Autowired
+
     private ProductoRepository productoRepository;
+    @Autowired
+    public ProductoServiceImpl(ProductoRepository productoRepository) {
+        this.productoRepository = productoRepository;
+    }
     @Override // Implementar Método save
     public Producto save(Producto producto) {
         return productoRepository.save(producto);

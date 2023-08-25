@@ -15,9 +15,11 @@ public class Orden {
     private Date fechaRecibida;
 
     private double total;
-
+    @ManyToOne
+    @JoinColumn(name ="usuario_id")
     private Usuario usuario;
-    @OneToOne(mappedBy = "orden")
+    @ManyToOne
+    @JoinColumn(name ="usuario")
     private DetalleOrden detalleOrden;
 
     public Orden(){

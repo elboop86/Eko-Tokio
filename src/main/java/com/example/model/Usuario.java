@@ -41,8 +41,9 @@ public class Usuario {
     }
     // cambio
     @ManyToOne
-    @JoinColumn(name = "id") // Cambia "usuario_id" por el nombre de la columna en la tabla "ordenes"
+    @JoinColumn // Cambia "usuario_id" por el nombre de la columna en la tabla "ordenes"
     private Usuario usuario;
+
     public Usuario( String s1, String s2, String s3,String s4, String s5, String s6,String s7) {
     }
 
