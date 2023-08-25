@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.model.Producto;
 import com.example.repository.ProductoRepository;
 import com.example.service.ProductoService;
 import org.slf4j.Logger;
@@ -10,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
@@ -23,8 +26,15 @@ public class HomeController {
         return "usuario/home";
     }
     @GetMapping("productohome/{id}")
-    public String productoHome(@PathVariable Integer id) {
+    public String productoHome(@PathVariable Integer id, Model model) {
         log.info("Id producto enviado como parámetro {}",id);
+        Producto producto = new Producto();
+        Optional<Producto> productoOptional= productoService.get(id);
+        producto = productoOptional.get();
+
+        model.addAttribute("producto", producto);
+
+
         return "usuario/productohome";
     }
 }
