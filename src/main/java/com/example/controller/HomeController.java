@@ -3,8 +3,10 @@ package com.example.controller;
 import com.example.model.DetalleOrden;
 import com.example.model.Orden;
 import com.example.model.Producto;
+import com.example.model.Usuario;
 import com.example.repository.ProductoRepository;
 import com.example.service.ProductoService;
+import com.example.service.UsuarioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,8 @@ public class HomeController {
     private final Logger log = LoggerFactory.getLogger(HomeController.class);
     @Autowired
     private ProductoService productoService;
+    @Autowired
+    private UsuarioService usuarioService;
     // Almacena los detalles de la orden
     List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
 
@@ -123,7 +127,14 @@ public class HomeController {
     }
 
     @GetMapping("/order")
-    public String order() {
+    public String order(Model model) {
+
+        Usuario usuario =usuarioService.findById(1).get();
+
+        Orden orden = new Orden();  // Crear un nuevo objeto Orden
+        model.addAttribute("cart", detalles);
+        model.addAttribute("orden", orden);
+        model.addAttribute("usuario", usuario);
         return "usuario/resumenorden";
     }
 }
