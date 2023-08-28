@@ -5,6 +5,8 @@ import com.example.model.Orden;
 import com.example.model.Producto;
 import com.example.model.Usuario;
 import com.example.repository.ProductoRepository;
+import com.example.service.DetalleOrdenService;
+import com.example.service.OrdenService;
 import com.example.service.ProductoService;
 import com.example.service.UsuarioService;
 import org.slf4j.Logger;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.text.AttributedString;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.DoubleStream;
@@ -27,8 +30,17 @@ public class HomeController {
     private final Logger log = LoggerFactory.getLogger(HomeController.class);
     @Autowired
     private ProductoService productoService;
+
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private OrdenService ordenService;
+
+    @Autowired
+    private DetalleOrdenService detalleOrdenService;
+
+
     // Almacena los detalles de la orden
     List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
 
@@ -136,5 +148,30 @@ public class HomeController {
         model.addAttribute("orden", orden);
         model.addAttribute("usuario", usuario);
         return "usuario/resumenorden";
+    }
+// guardar la orden
+    @GetMapping("/saveOrder")
+    public String saveOrder() {
+        Date fechaCreacion = new Date();
+        Orden orden = new Orden();  // Crear un nuevo objeto Orden
+        orden.setFechaCreacion(fechaCreacion);
+        orden.setNumero(ordenService.generarNumeroOrden());
+        // usuario
+        Usuario usuario = usuarioService.findById(1).get();
+
+        orden.setUsuario(usuario);
+        ordenService.save(orden);
+
+        //guardar detalles
+        for(DetalleOrden dt: detalles) {
+            dt.setOrden(orden);
+            detalleOrdenService.save(dt);
+        }
+        // limpiarla lista y la orden
+        orden = new Orden();
+        detalles.clear();
+
+
+        return "redirect:/";
     }
 }
