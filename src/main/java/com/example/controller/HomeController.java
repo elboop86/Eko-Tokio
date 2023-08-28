@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.servlet.http.HttpSession;
 import java.text.AttributedString;
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,7 +52,8 @@ public class HomeController {
 
 
     @GetMapping("")
-    public String home(Model model) {
+    public String home(Model model, HttpSession session) {
+        log.info("Session del usuario: {}", session.getAttribute("idusuario"));
         model.addAttribute("productos", productoService.findAll());
         return "usuario/home";
     }
@@ -142,9 +144,9 @@ public class HomeController {
     }
 
     @GetMapping("/order")
-    public String order(Model model) {
-
-        Usuario usuario =usuarioService.findById(1).get();
+    public String order(Model model, HttpSession session) {
+        // obtengo el usuario
+        Usuario usuario =usuarioService.findById(Integer.parseInt(session.getAttribute("idusuario").toString())).get();
 
         Orden orden = new Orden();  // Crear un nuevo objeto Orden
         model.addAttribute("cart", detalles);
@@ -154,13 +156,13 @@ public class HomeController {
     }
 // guardar la orden
     @GetMapping("/saveOrder")
-    public String saveOrder() {
+    public String saveOrder(HttpSession session) {
         Date fechaCreacion = new Date();
         Orden orden = new Orden();  // Crear un nuevo objeto Orden
         orden.setFechaCreacion(fechaCreacion);
         orden.setNumero(ordenService.generarNumeroOrden());
-        // usuario
-        Usuario usuario = usuarioService.findById(1).get();
+        // Guarda la session de  usuario
+        Usuario usuario = usuarioService.findById(Integer.parseInt(session.getAttribute("idusuario").toString())).get();
 
         orden.setUsuario(usuario);
         ordenService.save(orden);

@@ -4,6 +4,7 @@ import com.example.model.Producto;
 import com.example.model.Usuario;
 import com.example.service.ProductoService;
 import com.example.service.UploadFileService;
+import com.example.service.UsuarioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,18 +13,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
+
+
 
 @Controller
 @RequestMapping("/productos")
 public class ProductoController {
 
-    private final Logger log= LoggerFactory.getLogger(ProductoController.class);
+    private final Logger LOGGER= LoggerFactory.getLogger(ProductoController.class);
     // Método para guardar un producto nuevo, Logger es para registrar mensajes de un componente a un sistema o aplicación.
 
     @Autowired
     private ProductoService productoService;
+
+    @Autowired
+    private UsuarioService usuarioService;
     @Autowired
     private UploadFileService upload;
 
@@ -42,12 +49,20 @@ public class ProductoController {
 
     // Método guardar producto
     @PostMapping ("/save")
-    public String save(Producto producto) throws IOException {
-        log.info("Mensaje correcto");
-        Usuario u = new Usuario(1,"","","","","","","");
+    public String save(Producto producto, @RequestParam("img") MultipartFile file, HttpSession session) throws IOException {
+        LOGGER.info("Este es el objeto del producto {}", producto);
+
+
+        Usuario u = usuarioService.findById(Integer.parseInt(session.getAttribute("idusuario").toString())).get();
         producto.setUsuario(u);
 
+        // imagen
+        if(producto.getId()==null) {
+            String nombreImagen = upload.saveImage(file);
+            producto.setImagen(nombreImagen);
+        } else {
 
+        }
         productoService.save(producto);
         return "redirect:/productos";
     }
@@ -58,7 +73,7 @@ public class ProductoController {
         Optional<Producto> optionalProducto=productoService.get(id);
         producto= optionalProducto.get();
 
-        log.info("Producto buscado: {}");
+        LOGGER.info("Producto buscado: {}", producto);
         model.addAttribute("producto", producto); //Envia a la vista el objeto buscado
         return "productos/edit";
     }
