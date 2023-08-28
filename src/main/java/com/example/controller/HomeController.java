@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 
 @Controller
@@ -46,6 +47,8 @@ public class HomeController {
 
     // Datos de la orden
     Orden oreden = new Orden();
+
+
 
     @GetMapping("")
     public String home(Model model) {
@@ -173,5 +176,15 @@ public class HomeController {
 
 
         return "redirect:/";
+    }
+
+    //busqueda
+    @PostMapping("/search")
+    public String searchProduct(@RequestParam String nombre, Model model) {
+        log.info("Nombre del producto: {}", nombre);
+        List<Producto> productos= productoService.findAll().stream().filter(p ->p.getNombre().contains(nombre)).collect(Collectors.toList());
+
+        model.addAttribute("productos", productos);
+        return "usuario/home";
     }
 }
