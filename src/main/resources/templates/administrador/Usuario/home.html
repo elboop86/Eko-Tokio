@@ -22,17 +22,19 @@
 <body>
 
 <!-- Navigation -->
-<div th:include="usuario/template_usuario.html::header">
+// condicion if si sesion es nullentra a header no login
+<div th:include="usuario/template_usuario.html::header" th:if="${sesion== null}"></div> //header para cuando no esta login
 
-</div>
+// condicion if si sesion es nullentra a header login
+<div th:include="usuario/template_usuario.html::header-user" th:unless="${sesion==null}"></div> //header para cuando esta login
 
 <!-- Page Content -->
 <div class="container">
 
     <!-- Jumbotron Header -->
     <header class="jumbotron my-4">
-        <h1 class="display-3">Bienvenido a Spring Ecommerce 2021</h1>
-        <p class="lead">Tu tienda de productos en Línea</p>
+        <h1 class="display-3">Bienvenido a Eko Tokio 2023</h1>
+        <p class="lead">Tu tienda de frutas y hortalizas en Línea</p>
     </header>
 
     <!-- Page Features -->
