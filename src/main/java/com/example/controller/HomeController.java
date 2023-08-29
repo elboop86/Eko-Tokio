@@ -9,6 +9,7 @@ import com.example.service.OrdenService;
 import com.example.service.ProductoService;
 import com.example.service.UsuarioService;
 
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,11 +42,7 @@ public class HomeController {
 
 
     // Almacena los detalles de la orden
-    List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
-
-    // Datos de la orden
-    Orden oreden = new Orden();
-
+    List<DetalleOrden> detalles = new ArrayList<>();
 
 
     @GetMapping("")
@@ -60,9 +57,9 @@ public class HomeController {
     }
 
     @GetMapping("productohome/{id}")
-    public String productoHome(@PathVariable Integer id, Model model) {
+    public String productoHome(@PathVariable Integer id, @NotNull Model model) {
         log.info("Id producto enviado como parámetro {}", id);
-        Producto producto = new Producto();
+        Producto producto;
         Optional<Producto> productoOptional = productoService.get(id);
         producto = productoOptional.get();
 
@@ -75,14 +72,13 @@ public class HomeController {
     @PostMapping("/cart")
     public String addCart(@RequestParam Integer id, @RequestParam Integer cantidad, Model model) {
         DetalleOrden detalleOrden = new DetalleOrden();
-        Producto producto = new Producto();
+        Producto producto;
         double sumaTotal = 0;
 
         Optional<Producto> optionalProducto = productoService.get(id);
         log.info("Product añadido: {}", optionalProducto.get());
         log.info("Cantidad: {}", cantidad);
         producto = optionalProducto.get();
-
         detalleOrden.setCantidad(cantidad);
         detalleOrden.setPrecio(producto.getPrecio());
         detalleOrden.setNombre(producto.getNombre());
