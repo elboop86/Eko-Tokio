@@ -1,6 +1,8 @@
 package com.example.controller;
 
+import com.example.model.Orden;
 import com.example.model.Usuario;
+import com.example.service.OrdenService;
 import com.example.service.UsuarioService;
 import com.mysql.cj.x.protobuf.MysqlxCursor;
 import org.slf4j.Logger;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -21,6 +24,9 @@ public class UsuarioController {
     private final Logger logger = LoggerFactory.getLogger(UsuarioController.class);
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private OrdenService ordenService;
 
     // usuario/registro
     @GetMapping("/registro")
@@ -64,6 +70,11 @@ public class UsuarioController {
     @GetMapping("/compras")
     public String obtenerCompras(Model model, HttpSession session) {
         model.addAttribute("sesion", session.getAttribute("idusuario"));
+        Usuario usuario = usuarioService.findById( Integer.parseInt(session.getAttribute("idusuario").toString())).get();
+        List<Orden> ordenes = ordenService.findByUsuario(usuario);
+
+        model.addAttribute("ordenes", ordenes);
+
         return "usuario/compras";
 
     }

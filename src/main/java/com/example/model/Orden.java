@@ -4,6 +4,8 @@ package com.example.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+
 @Entity
 @Table(name = "ordenes")
 public class Orden {
@@ -13,14 +15,12 @@ public class Orden {
     private String numero;
     private Date fechaCreacion;
     private Date fechaRecibida;
-
     private double total;
+
     @ManyToOne
-    @JoinColumn(name ="usuario_id")
     private Usuario usuario;
-    @ManyToOne
-    @JoinColumn(name ="usuario")
-    private DetalleOrden detalleOrden;
+    @OneToMany(mappedBy = "orden")
+    private List<DetalleOrden> detalle;
 
     public Orden(){
 
@@ -83,12 +83,12 @@ public class Orden {
         this.usuario = usuario;
     }
 
-    public DetalleOrden getDetalleOrden() {
-        return detalleOrden;
+    public List<DetalleOrden> getDetalle() {
+        return detalle;
     }
 
-    public void setDetalleOrden(DetalleOrden detalleOrden) {
-        this.detalleOrden = detalleOrden;
+    public void setDetalle(List<DetalleOrden> detalle) {
+        this.detalle = detalle;
     }
 
     @Override
