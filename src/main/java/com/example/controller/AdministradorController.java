@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.model.Producto;
+import com.example.service.OrdenService;
 import com.example.service.ProductoService;
 import com.example.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class AdministradorController {
     private ProductoService productoService;
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private OrdenService ordenService;
     @GetMapping("")
     public String home(Model model) {
         List<Producto> productos= productoService.findAll();
@@ -30,5 +33,10 @@ public class AdministradorController {
         model.addAttribute("usuarios", usuarioService.findAll());
 
         return "administrador/usuarios";
+    }
+    @GetMapping("/ordenes")
+    public String ordenes(Model model) {
+        model.addAttribute("ordenes", ordenService.findAll());
+        return "administrador/ordenes";
     }
 }
