@@ -4,7 +4,7 @@ import com.example.model.Orden;
 import com.example.model.Usuario;
 import com.example.service.OrdenService;
 import com.example.service.UsuarioService;
-import com.mysql.cj.x.protobuf.MysqlxCursor;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jakarta.servlet.http.HttpSession;
+
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
