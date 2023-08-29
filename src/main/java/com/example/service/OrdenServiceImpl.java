@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrdenServiceImpl implements OrdenService{
@@ -18,6 +19,11 @@ public class OrdenServiceImpl implements OrdenService{
     @Override
     public List<Orden> findAll() {
         return ordenRepository.findAll();
+    }
+
+    @Override
+    public Optional<Orden> findById(Integer id) {
+        return ordenRepository.findById(id);
     }
 
     public String generarNumeroOrden() {
