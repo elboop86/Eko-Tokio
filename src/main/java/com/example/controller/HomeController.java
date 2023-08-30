@@ -45,7 +45,7 @@ public class HomeController {
     List<DetalleOrden> detalles = new ArrayList<>();
 
 
-    @GetMapping("")
+    @GetMapping("/")
     public String home(Model model, HttpSession session) {
         log.info("Session del usuario: {}", session.getAttribute("idusuario"));
 
