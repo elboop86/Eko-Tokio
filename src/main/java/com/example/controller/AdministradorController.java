@@ -27,23 +27,23 @@ public class AdministradorController {
     private OrdenService ordenService;
 
     private Logger logg = LoggerFactory.getLogger(AdministradorController.class);
-    @GetMapping("")
+    @GetMapping("/")
     public String home(Model model) {
         List<Producto> productos= productoService.findAll();
         model.addAttribute("productos", productos);
 
-        return "administrador/home";
+        return "administrador/administrador/home";
     }
     @GetMapping("/usuarios")
     public String usuarios(Model model) {
         model.addAttribute("usuarios", usuarioService.findAll());
 
-        return "administrador/usuarios";
+        return "administrador/administrador/usuarios";
     }
     @GetMapping("/ordenes")
     public String ordenes(Model model) {
         model.addAttribute("ordenes", ordenService.findAll());
-        return "administrador/ordenes";
+        return "administrador/administrador/ordenes";
     }
 
     @GetMapping("/detalle/{id}")
@@ -52,6 +52,6 @@ public class AdministradorController {
         Orden orden = ordenService.findById(id).get();
 
         model.addAttribute("detalles", orden.getDetalle());
-      return "administrador/detalleorden";
+      return "administrador/administrador/detalleorden";
     }
 }

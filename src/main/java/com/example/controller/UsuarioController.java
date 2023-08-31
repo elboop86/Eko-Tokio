@@ -36,7 +36,8 @@ public class UsuarioController {
     // usuario/registro
     @GetMapping("/registro")
     public String create() {
-        return "usuario/registro";
+
+        return "administrador/usuario/registro";
     }
     @PostMapping("/save")
     public String save(Usuario usuario) {
@@ -49,7 +50,8 @@ public class UsuarioController {
     // usuario Login
     @GetMapping("/login")
     public String login() {
-        return "usuario/login";
+
+        return "administrador/usuario/login";
     }
     @PostMapping("/acceder")
     public String acceder(Usuario usuario, HttpSession session) {
@@ -83,7 +85,7 @@ public class UsuarioController {
 
         model.addAttribute("ordenes", ordenes);
 
-        return "usuario/compras";
+        return "administrador/usuario/compras";
 
     }
 
@@ -95,7 +97,7 @@ public class UsuarioController {
         model.addAttribute("detalles", orden.get().getDetalle());
         // session
         model.addAttribute("sesion", session.getAttribute("idusuario"));
-        return "usuario/detalleCompra";
+        return "administrador/usuario/detalleCompra";
     }
 // cerrar sesion del usuario
     @GetMapping("/cerrar")

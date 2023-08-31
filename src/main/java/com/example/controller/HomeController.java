@@ -53,10 +53,10 @@ public class HomeController {
 
         // session
         model.addAttribute("sesion", session.getAttribute("idusuario"));
-        return "usuario/home";
+        return "administrador/usuario/home";
     }
 
-    @GetMapping("productohome/{id}")
+    @GetMapping("/productohome/{id}")
     public String productoHome(@PathVariable Integer id, @NotNull Model model) {
         log.info("Id producto enviado como parámetro {}", id);
         Producto producto;
@@ -66,7 +66,7 @@ public class HomeController {
         model.addAttribute("producto", producto);
 
 
-        return "usuario/productohome";
+        return "administrador/usuario/productohome";
     }
 
     @PostMapping("/cart")
@@ -104,11 +104,11 @@ public class HomeController {
         model.addAttribute("cart", detalles);
         model.addAttribute("orden", orden);
 
-        return "usuario/carrito";
+        return "adiministrador/usuario/carrito";
     }
 
     // Quitar un producto del carrito
-    @GetMapping("delete/cart/{id}")
+    @GetMapping("/delete/cart/{id}")
     public String deleteProductoCart(@PathVariable Integer id, Model model) {
 
         List<DetalleOrden> ordenesNueva = new ArrayList<DetalleOrden>();
@@ -129,7 +129,7 @@ public class HomeController {
         model.addAttribute("cart", detalles);
         model.addAttribute("orden", orden);
 
-        return "usuario/carrito";
+        return "administrador/usuario/carrito";
     }
 
     @GetMapping("/getCart")
@@ -140,7 +140,7 @@ public class HomeController {
 
         //sesion
         model.addAttribute("sesion", session.getAttribute("idusuario"));
-        return "/usuario/carrito";
+        return "administrador/usuario/carrito";
     }
 
     @GetMapping("/order")
@@ -152,7 +152,7 @@ public class HomeController {
         model.addAttribute("cart", detalles);
         model.addAttribute("orden", orden);
         model.addAttribute("usuario", usuario);
-        return "usuario/resumenorden";
+        return "administrador/usuario/resumenorden";
     }
 // guardar la orden
     @GetMapping("/saveOrder")
@@ -187,6 +187,6 @@ public class HomeController {
         List<Producto> productos= productoService.findAll().stream().filter(p ->p.getNombre().contains(nombre)).collect(Collectors.toList());
 
         model.addAttribute("productos", productos);
-        return "usuario/home";
+        return "administrador/usuario/home";
     }
 }

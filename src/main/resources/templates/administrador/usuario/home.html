@@ -22,12 +22,13 @@
 <body>
 
 <!-- Navigation -->
-// condicion if si sesion es nullentra a header no login
-<div th:include="usuario/template_usuario.html::header" th:if="${sesion== null}"></div> //header para cuando no esta login
-
-// condicion if si sesion es nullentra a header login
-<div th:include="usuario/template_usuario.html::header-user" th:unless="${sesion==null}"></div> //header para cuando esta login
-
+<!-- condicion if si sesion es nullentra a header no login
+// revisar
+<div th:include="/administrador/usuario/template_usuario.html::header" th:if="${sesion== null}"></div> //header para cuando no esta login
+-->
+<!-- condicion if si sesion es nullentra a header login
+<div th:include="/administrador/usuario/template_usuario.html::header-user" th:unless="${sesion==null}"></div> //header para cuando esta login
+-->
 <!-- Page Content -->
 <div class="container">
 
@@ -40,7 +41,7 @@
     <!-- Page Features -->
     <div class="row text-center">
 
-        <div class="col-lg-3 col-md-6 mb-4" th:each="productos: ${productos}">
+        <div class="col-lg-3 col-md-6 mb-4" th:each="producto: ${productos}">
             <div class="card h-100">
                 <img class="card-img-top" th:src="@{/images/{img} (img=${producto.imagen})}" alt="">
                 <div class="card-body">
@@ -54,8 +55,8 @@
     </div>
     <!-- /.container -->
 </div>
-<!-- Footer -->
-<div th:include="usuario/template_usuario.html::footer">
+<!-- Footer -->// revisar
+<!--<div th:include="administrador/usuario/template_usuario.html::footer">-->
 
 </div>
 
