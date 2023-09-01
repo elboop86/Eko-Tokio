@@ -20,15 +20,15 @@
 </head>
 
 <body>
-
+<!--Revisar no esta bien redireccionado-->
 <!-- Navigation -->
-<!-- condicion if si sesion es nullentra a header no login
-// revisar
+<!-- condicion if si sesion es nullentra a header no login-->
+<!--revisar-->
 <div th:include="/administrador/usuario/template_usuario.html::header" th:if="${sesion== null}"></div> //header para cuando no esta login
--->
-<!-- condicion if si sesion es nullentra a header login
+
+<!-- condicion if si sesion es nullentra a header login-->
 <div th:include="/administrador/usuario/template_usuario.html::header-user" th:unless="${sesion==null}"></div> //header para cuando esta login
--->
+
 <!-- Page Content -->
 <div class="container">
 
@@ -56,7 +56,7 @@
     <!-- /.container -->
 </div>
 <!-- Footer -->
-<div th:include="template.administrador/usuario/template_usuario.html::footer"></div>
+<div th:include="administrador/usuario/template_usuario.html::footer"></div>
 
 </div>
 

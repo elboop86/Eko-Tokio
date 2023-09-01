@@ -42,7 +42,7 @@
             <div class="collapse navbar-collapse" class="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a class="nav-link" th:href="@{/getCart}">Carrito</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{template.administrador/usuario/login}">Login</a></li> <!--Revisar!-->
+                    <li class="nav-item"><a class="nav-link" th:href="@{administrador/usuario/login}">Login</a></li> <!--Revisar!-->
                 </ul>
             </div>
         </div>
@@ -56,7 +56,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" th:href="@{/}">Eko Tokio</a>
+            <a class="navbar-brand" th:href="@{administrador/usuario/home}">Eko Tokio</a>
 
             <form class="form-inline my-2 my-lg-0" method="post" th:action="@{/search}">
                 <input class="form-control mr-sm-2" type="search"
