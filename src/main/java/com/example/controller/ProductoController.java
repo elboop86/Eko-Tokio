@@ -41,13 +41,13 @@ public class ProductoController {
     @GetMapping("")
     public String show(Model model) {
         model.addAttribute("productos", productoService.findAll());
-        return "productos/show";
+        return "administrador/productos/show";
     }
 
     @GetMapping("/create")
     public String create() {
 
-        return "productos/create";
+        return "administrador/productos/create";
     }
 
     @PostMapping("/save")
@@ -79,7 +79,7 @@ public class ProductoController {
         LOGGER.info("Producto buscado: {}",producto);
         model.addAttribute("producto", producto);
 
-        return "productos/edit";
+        return "administrador/productos/edit";
     }
 
     @PostMapping("/update")
