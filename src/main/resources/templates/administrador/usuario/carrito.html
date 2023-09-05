@@ -23,13 +23,13 @@
 
 
 <!-- Navigation -->
-// condicion if si sesion es nullentra a header no login
-<div th:include="usuario/template_usuario.html::header" th:if="${sesion== null}"></div>
-//header para cuando no esta login
+<!--// condicion if si sesion es nullentra a header no login-->
+<div th:include="administrador/usuario/template_usuario.html::header" th:if="${sesion== null}"></div>
+<!--//header para cuando no esta login-->
 
-// condicion if si sesion es null entra a header login
-<div th:include="usuario/template_usuario.html::header-user" th:unless="${sesion==null}"></div>
-//header para cuando esta logeado
+<!--// condicion if si sesion es null entra a header login-->
+<div th:include="administrador/usuario/template_usuario.html::header-user" th:unless="${sesion==null}"></div>
+<!--//header para cuando esta logeado-->
 
 <!-- Page Content -->
 <div class="container">
@@ -89,7 +89,7 @@
 </div>
 </div>
 <!-- Footer -->
-<div th:include="template.administrador/usuario/template_usuario.html::footer"></div>
+<div th:include="administrador/usuario/template_usuario.html::footer"}></div>
 
 <!-- Bootstrap core JavaScript -->
 <script th:src="@{/vendor/jquery/jquery.min.js}"></script>

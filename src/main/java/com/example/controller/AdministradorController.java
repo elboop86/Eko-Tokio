@@ -32,18 +32,18 @@ public class AdministradorController {
         List<Producto> productos= productoService.findAll();
         model.addAttribute("productos", productos);
 
-        return "administrador/administrador/home";
+        return "administrador/home";
     }
     @GetMapping("/usuarios")
     public String usuarios(Model model) {
         model.addAttribute("usuarios", usuarioService.findAll());
 
-        return "administrador/administrador/usuarios";
+        return "administrador/usuarios";
     }
     @GetMapping("/ordenes")
     public String ordenes(Model model) {
         model.addAttribute("ordenes", ordenService.findAll());
-        return "administrador/administrador/ordenes";
+        return "administrador/ordenes";
     }
 
     @GetMapping("/detalle/{id}")
@@ -52,6 +52,6 @@ public class AdministradorController {
         Orden orden = ordenService.findById(id).get();
 
         model.addAttribute("detalles", orden.getDetalle());
-      return "administrador/administrador/detalleorden";
+      return "administrador/detalleorden";
     }
 }

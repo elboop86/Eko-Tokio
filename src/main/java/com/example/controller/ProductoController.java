@@ -41,13 +41,13 @@ public class ProductoController {
     @GetMapping("")
     public String show(Model model) {
         model.addAttribute("productos", productoService.findAll());
-        return "administrador/administrador/productos/show";
+        return "productos/show";
     }
 
     @GetMapping("/create")
     public String create() {
 
-        return "administrador/administrador/productos/create";
+        return "productos/create";
     }
 
     @PostMapping("/save")
@@ -79,7 +79,7 @@ public class ProductoController {
         LOGGER.info("Producto buscado: {}",producto);
         model.addAttribute("producto", producto);
 
-        return "administrador/administrador/productos/edit";
+        return "productos/edit";
     }
 
     @PostMapping("/update")
@@ -91,6 +91,7 @@ public class ProductoController {
 
             producto.setImagen(p.getImagen());
         }else {// cuando se edita tbn la imagen
+
             //eliminar cuando no sea la imagen por defecto
             if (!p.getImagen().equals("default.jpg")) {
                 upload.deleteImage(p.getImagen());
