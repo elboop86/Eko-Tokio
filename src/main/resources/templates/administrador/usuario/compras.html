@@ -22,11 +22,11 @@
 <body>
 
 <!-- Navigation -->
-<!--// condicion if si sesion es nullentra a header no login-->
+<!-- condicion if si sesion es nullentra a header no login-->
 <div th:include="administrador/usuario/template_usuario.html::header" th:if="${sesion== null}"></div>
 //header para cuando no esta login
 
-<!--// condicion if si sesion es null entra a header login-->
+<!-- condicion if si sesion es null entra a header login-->
 <div th:include="administrador/usuario/template_usuario.html::header-user" th:unless="${sesion==null}"></div>
 //header para cuando esta logeado
 
@@ -36,7 +36,7 @@
 
       <!-- Page Heading/Breadcrumbs -->
       <h1 class="mt-4 mb-3">
-        Spring eCommerce <small>Compras</small>
+        Eko Tokio <small>Compras</small>
       </h1>
 
       <ol class="breadcrumb">
@@ -63,7 +63,7 @@
                   <td th:text="${orden.numero}"></td>
                   <td th:text="${orden.fechaCreacion}"></td>
                   <td th:text="${orden.total}"></td>
-                  <td><a th:href="@{/usuario/detalle/{id} (id =${orden.id}) }" class="btn btn-success">Ver Detalle</a></td>
+                  <td><a th:href="@{usuario/detalle/{id} (id =${orden.id}) }" class="btn btn-success">Ver Detalle</a></td>
                 </tr>
               </tbody>
             </table>

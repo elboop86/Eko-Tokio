@@ -22,7 +22,7 @@
 <body>
 
 <!--Ruta para mostrar el header-->
-<div th:include="administrador/template_admin.html::header"></div>
+<div th:include="administrador/administrador/template_admin.html::header"></div>
 
 <!-- Page Content -->
 <div class="container">
@@ -36,14 +36,14 @@
     <!-- Page Features -->
     <div class="row text-center">
 
-        <div class="col-lg-3 col-md-6 mb-4" th:each="productos: ${productos}">
+        <div class="col-lg-3 col-md-6 mb-4" th:each="producto: ${productos}">
             <div class="card h-100">
                 <img class="card-img-top" th:src="@{/images/{img} (img=${producto.imagen})}" alt="">
                 <div class="card-body">
                     <p class="card-text" th:text="${producto.nombre}"></p>
                 </div>
                 <div class="card-footer">
-                    <a href="productohome.html" class="btn btn-success">Ver producto</a>
+                    <a th:href="@{/productohome.html}" class="btn btn-success">Ver producto</a>
                 </div>
             </div>
         </div>
@@ -57,7 +57,7 @@
 <!-- /.container -->
 
 <!--Ruta para mostrar el footer-->
-<div th:include="administrador/template_admin.html::footer"></div>
+<div th:include="administrador/administrador/template_admin.html::footer"></div>
 
 <!-- Bootstrap core JavaScript -->
 <script th:src="@{vendor/jquery/jquery.min.js}"></script>

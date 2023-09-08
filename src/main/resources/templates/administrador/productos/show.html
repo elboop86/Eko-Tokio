@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Spring eCommerce</title>
+  <title>Eko Tokio</title>
 
 
   <!-- Bootstrap core CSS -->
@@ -22,7 +22,7 @@
 <body>
 
   <!-- Ruta para el header -->
-  <div th:include="administrador/template_admin.html::header"></div>
+  <div th:include="administrador/administrador/template_admin.html::header"></div>
 
 <!-- Page Content -->
 <div class="container">
@@ -38,7 +38,7 @@
     <li class="breadcrumb-item active">Ver Productos</li>
   </ol>
 
-  <a class="btn btn-primary" th:href="@{/productos/create}" > Crear Producto</a>
+  <a class="btn btn-primary" th:href="@{productos/create}" > Crear Producto</a>
   <h2>Productos</h2>
   <table class="table">
     <thead>
@@ -67,7 +67,7 @@
 <!-- /.container -->
 
   <!--Ruta para mostrar el footer-->
-  <div th:include="administrador/template_admin.html::footer"></div>
+  <div th:include="administrador/administrador/template_admin.html::footer"></div>
 
   <!-- Bootstrap core JavaScript -->
   <script th:src="@{vendor/jquery/jquery.min.js}"></script>

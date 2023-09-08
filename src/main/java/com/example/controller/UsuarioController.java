@@ -34,7 +34,7 @@ public class UsuarioController {
     BCryptPasswordEncoder passEncode= new BCryptPasswordEncoder(); //Método para el password
 
     // usuario/registro
-    @GetMapping("/registro")
+    @GetMapping("/registro") // redirecciona bien
     public String create() {
 
         return "administrador/usuario/registro";
@@ -48,7 +48,7 @@ public class UsuarioController {
         return "redirect:/";
     }
     // usuario Login
-    @GetMapping("/login")
+    @GetMapping("/login") //redirecciona bien
     public String login() {
 
         return "administrador/usuario/login";
@@ -72,10 +72,10 @@ public class UsuarioController {
         } else {
             logger.info("Usuario no existe");
         }
-        return "redirect:/";
+        return "administrador/usuario/acceder"; // originalmente tenía "redirect:/"
     }
 
-    @GetMapping("/compras")
+    @GetMapping("/compras") // redirecciona bien
     public String obtenerCompras(Model model, HttpSession session) {
         model.addAttribute("sesion", session.getAttribute("idusuario"));
 

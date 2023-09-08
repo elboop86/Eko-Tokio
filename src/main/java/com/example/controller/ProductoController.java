@@ -38,7 +38,7 @@ public class ProductoController {
     @Autowired
     private UploadFileService upload;
 
-    @GetMapping("")
+    @GetMapping("/show")
     public String show(Model model) {
         model.addAttribute("productos", productoService.findAll());
         return "administrador/productos/show";
