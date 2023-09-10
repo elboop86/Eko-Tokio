@@ -43,6 +43,8 @@ public class Producto {
         this.cantidad = cantidad;
     }
 
+
+
     public Integer getId() {
         return id;
     }

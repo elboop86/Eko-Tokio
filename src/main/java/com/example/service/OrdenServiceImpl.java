@@ -27,33 +27,48 @@ public class OrdenServiceImpl implements OrdenService{
     }
 
     public String generarNumeroOrden() {
-        int numero= 0;
-        String numeroConcatenado= "";
+        int numero = 0;
+        String numeroConcatenado = "";
 
         List<Orden> ordenes = findAll();
 
         List<Integer> numeros = new ArrayList<Integer>();
-        ordenes.stream().forEach(o -> numeros.add(Integer.parseInt(o.getNumero())));
+
+        ordenes.forEach(o -> {
+            String numeroStr = o.getNumero();
+            try {
+                int numeroOrden = Integer.parseInt(numeroStr);
+                numeros.add(numeroOrden);
+            } catch (NumberFormatException e) {
+                // Manejar el caso en el que el valor no sea numérico
+                // Por ejemplo, puedes ignorar este valor o registrar un mensaje de error
+                // dependiendo de tus requisitos
+                // También puedes omitirlo de la lista de números si es necesario
+            }
+        });
 
         // La numeración de las ordenes hasta 10.000, se ordena un numero ordenado a mayor a cada orden realizada.
-        if(ordenes.isEmpty()) {
-            numero= 1;
+        if (ordenes.isEmpty()) {
+            numero = 1;
         } else {
-            numero = numeros.stream().max(Integer::compare).get();
+            numero = numeros.stream().max(Integer::compare).orElse(0); // Usar 0 si no hay números válidos
             numero++;
         }
 
-        if(numero<10) {
+        if (numero < 10) {
             numeroConcatenado = "000000000" + String.valueOf(numero);
-        } else if(numero<100) {
-            numeroConcatenado= "00000000" + String.valueOf(numero);
-        } else if (numero<1000) {
+        } else if (numero < 100) {
+            numeroConcatenado = "00000000" + String.valueOf(numero);
+        } else if (numero < 1000) {
             numeroConcatenado = "0000000" + String.valueOf(numero);
-        } else if (numero<10000) {
+        } else if (numero < 10000) {
             numeroConcatenado = "000000" + String.valueOf(numero);
         }
-        return "numeroConcatenado";
+
+        return numeroConcatenado;
     }
+
+
 
     @Override
     public List<Orden> findByUsuario(Usuario usuario) {

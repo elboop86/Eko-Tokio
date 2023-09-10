@@ -27,7 +27,7 @@ public class AdministradorController {
     private OrdenService ordenService;
 
     private Logger logg = LoggerFactory.getLogger(AdministradorController.class);
-    @GetMapping("/administrador")
+    @GetMapping("")
     public String home(Model model) {
         List<Producto> productos= productoService.findAll();
         model.addAttribute("productos", productos);

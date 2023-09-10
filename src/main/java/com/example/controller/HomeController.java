@@ -44,22 +44,25 @@ public class HomeController {
     // Almacena los detalles de la orden
     List<DetalleOrden> detalles = new ArrayList<>();
 
+    Orden orden = new Orden();
 
-    @GetMapping("/")
+    @GetMapping("")
     public String home(Model model, HttpSession session) {
+        //HttpSession session = request.getSession();
         log.info("Session del usuario: {}", session.getAttribute("idusuario"));
 
         model.addAttribute("productos", productoService.findAll());
 
         // session
+
         model.addAttribute("sesion", session.getAttribute("idusuario"));
         return "administrador/usuario/home";
     }
 
     @GetMapping("/productohome/{id}")
-    public String productoHome(@PathVariable Integer id, @NotNull Model model) {
+    public String productoHome(@PathVariable Integer id,  Model model) {
         log.info("Id producto enviado como parámetro {}", id);
-        Producto producto;
+        Producto producto = new Producto();
         Optional<Producto> productoOptional = productoService.get(id);
         producto = productoOptional.get();
 
@@ -72,7 +75,7 @@ public class HomeController {
     @PostMapping("/cart")
     public String addCart(@RequestParam Integer id, @RequestParam Integer cantidad, Model model) {
         DetalleOrden detalleOrden = new DetalleOrden();
-        Producto producto;
+        Producto producto = new Producto();
         double sumaTotal = 0;
 
         Optional<Producto> optionalProducto = productoService.get(id);
@@ -104,7 +107,7 @@ public class HomeController {
         model.addAttribute("cart", detalles);
         model.addAttribute("orden", orden);
 
-        return "adiministrador/usuario/carrito";
+        return "administrador/usuario/carrito";
     }
 
     // Quitar un producto del carrito
@@ -132,7 +135,7 @@ public class HomeController {
         return "administrador/usuario/carrito";
     }
 
-    @GetMapping("/getCart")
+    @GetMapping("/getCart") // funciona se muestra bien pero sin resultados
     public String getCart(Model model, HttpSession session) {
         Orden orden = new Orden();  // Crear un nuevo objeto Orden
         model.addAttribute("cart", detalles);
@@ -143,7 +146,7 @@ public class HomeController {
         return "administrador/usuario/carrito";
     }
 
-    @GetMapping("/order")
+    @GetMapping("/order") //funciona pero no se muestra más que header y footer
     public String order(Model model, HttpSession session) {
         // obtengo el usuario
         Usuario usuario =usuarioService.findById(Integer.parseInt(session.getAttribute("idusuario").toString())).get();
@@ -155,7 +158,7 @@ public class HomeController {
         return "administrador/usuario/resumenorden";
     }
 // guardar la orden
-    @GetMapping("/saveOrder")
+    @GetMapping("/saveOrder") // funciona pero no se muestra más que header y footer
     public String saveOrder(HttpSession session) {
         Date fechaCreacion = new Date();
         Orden orden = new Orden();  // Crear un nuevo objeto Orden

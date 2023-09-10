@@ -57,11 +57,11 @@
       </div>
     </div>
 
-<form  th:action="@{/usuario/acceder}" method="post">
+<form  th:action="@{/usuario/login}" method="post">
 
       <div class="form-group">
-        <label for="email"> Email:  </label>      
-        <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su email" required autocomplete="off"> 
+        <label for="email"> Email:  </label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su email" required autocomplete="off">
 
       </div>
 
@@ -76,7 +76,7 @@
         </div>      
       </div>    
     </form><!-- no redirecciona-->
-    <a th:href="@{administrador/usuario/registro.html}" class="card-link">Si aún no tiene cuenta aqui puede registrarse</a>
+    <a th:href="@{/usuario/registro.html}" class="card-link">Si aún no tiene cuenta aqui puede registrarse</a>
   </div>
   <!-- /.container -->
 

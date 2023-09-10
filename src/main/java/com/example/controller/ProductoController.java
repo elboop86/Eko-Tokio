@@ -1,6 +1,8 @@
 package com.example.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -43,9 +45,13 @@ public class ProductoController {
         model.addAttribute("productos", productoService.findAll());
         return "administrador/productos/show";
     }
-
+    private List<Producto> productos = new ArrayList<>(); // Lista para almacenar productos
     @GetMapping("/create")
-    public String create() {
+    public String create(Model model) {
+        // ultimo retoque
+       // Producto Producto = new Producto(0,"nombre", "descripcion", "imagen", 1250, 50);
+      // productos.add(Producto);
+      //  model.addAttribute("productos", productos);
 
         return "administrador/productos/create";
     }
