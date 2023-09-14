@@ -28,7 +28,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
     private Logger log = LoggerFactory.getLogger(UserDetailServiceImpl.class);
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        log.info("Este es el username");
+        log.info("Este es el username: " + username);
         Optional<Usuario> optionalUser= usuarioService.findByEmail(username);
         if(optionalUser.isPresent()) {
             log.info("esto es id del usuario: {}", optionalUser.get().getId());

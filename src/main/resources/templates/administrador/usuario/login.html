@@ -29,14 +29,7 @@
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{administrador/usuario/login}">Login</a><!--No redirecciona-->
-          </li>
-        </ul>
-      </div>    
+      </button>  
     </div>
   </nav>
 
@@ -60,8 +53,8 @@
 <form  th:action="@{/usuario/login}" method="post">
 
       <div class="form-group">
-        <label for="email"> Email:  </label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su email" required autocomplete="off">
+        <label for="username"> Email:  </label>
+        <input type="email" class="form-control" id="username" name="username" placeholder="Ingrese su email" required autocomplete="off">
 
       </div>
 

@@ -31,6 +31,9 @@ public class UsuarioController {
     @Autowired
     private OrdenService ordenService;
 
+    @Autowired
+    HttpSession session;
+
     BCryptPasswordEncoder passEncode= new BCryptPasswordEncoder(); //Método para el password
 
     // usuario/registro
@@ -50,11 +53,16 @@ public class UsuarioController {
     // usuario Login
     @GetMapping("/login") //redirecciona bien
     public String login() {
-
-        return "administrador/usuario/login";
+        if (session.getAttribute("idusuario") != null) {
+            Optional<Usuario> user = usuarioService.findById(Integer.parseInt(session.getAttribute("idusuario").toString()));
+            this.acceder(user, session);
+            return "redirect:/";
+        } else {
+            return "administrador/usuario/login";
+        }
     }
     @GetMapping("/acceder")
-    public String acceder(Usuario usuario, HttpSession session) {
+    public String acceder(Optional<Usuario> usuario, HttpSession session) {
         logger.info("Accesos: {}", usuario);
 
         // Obtener usuario que tenga este email.
